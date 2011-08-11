@@ -11,3 +11,7 @@ To deploy to Heroku run:
 
   > heroku create
   > git push heroku master
+
+This is all based on fathom.js, with the shim nicked from:
+
+http://www.thecssninja.com/talks/dnd_and_friends/
