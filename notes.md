@@ -12,3 +12,28 @@ Why is Javascript relevant/why have this FFT
 So What will I be covering
 ===========================
 - Just like JavaScript objects - a mixed back of stuff from syntax and basics to frameworks and waky stuff.
+
+
+Syntax
+======
+- JavaScript is class-less
+- case sensitive
+- Comments - JS Good Parts only uses // because /* can be interpreted inside regular expressions
+- String
+  - Wrap text in either single or double quotes
+  - Immutable
+  - No character type, just create a one character string
+- Semicolons are required (but sort of not)
+- Whitespace can have effects eg 
+	- return
+		a + b;
+
+	// Returns undefined. Treated as:
+	//   return;
+	//   a + b;
+	But:
+	a = b + c
+	(d + e).foo()
+
+	// Treated as:
+	//   a = b + c(d + e).foo();

@@ -64,7 +64,7 @@
 				 <li>Testing</li>
 				 <li>Lots more if we have time (and I have the slides)</li>
 					<ul>
-						<li>Local storage, server side, templating, PhoneGap, MVC frameworks, CouchDB, CoffeeScript...</li>
+						<li>Local storage, server side, templating, JSLint, PhoneGap, MVC frameworks, CouchDB, CoffeeScript...</li>
 					</ul>
 	     </ul>
 	 </section>
@@ -93,26 +93,132 @@
 	<section class="slide">
 		<h1>Syntax</h1>
 	  <ul>
-			<li></li>
+			<li>JavaScript is a prototype-based, object-oriented scripting language that is dynamic, weakly typed and has first-class functions.</li>
+			<li>C like syntax</li>
 		</ul>
 		<pre>
+// A function
+/* with some comments (JavaScript 'The Good Parts' doesn't use this type) */
 function factorial(n) {
   if (n == 0) {
 	return 1;
   }
   return n * factorial(n - 1); 
-}</pre>
+}
+'c' + "a" + 't' === "cat"
+</pre>
+	</section>
+
+  <section class="slide">
+  	<h1>Reflecting on a Bag of State</h1>
+    <ul>
+  		<li>A JavaScript object is just an unordered collection of key value pairs (if not a primitive like <code>int</code> or <code>bool</code>) with some syntactic sugar for accessing the values.</li>
+		</ul>
+		<pre class="medium">
+var presentation = { "name":"Javascript", slides:99 };
+presentation.name; // returns "JavaScript"
+presentation["slides"]; // returns 99
+presentation.rating = function() { return "awsome!" };
+presentation.rating(); // returns "awsome!", as it should
+presentation["rating"](); // also "awsome!"
+presentation.badFeedback; // returns undefined
+presentation.hateMail.sender; // so unthinkable it will throw
+
+for(name in presentation) {
+   if(typeof presentation[name] !== 'function') {
+      document.writeln(name + ':' + presentation[name]);
+   }
+}
+		</pre>
+	</section>
+		
+	<section class="slide">
+		<h1>Funcy</h1>
+	  <ul>
+			<li>Functions are first class entities in JavaScript</li>
+			<li>Pass them around as you would an object - because they are!</li>
+			<li>Different ways to call a function: method, function, constructor, <code>apply</code>, <code>call</code></li>
+		</ul>
+		<pre>
+function product(a,b)	{ return a*b; }
+
+$.post('ajax/test.html', function(data) {
+  $('.result').html(data);
+});
+
+var arrayMaker = {  
+    someProperty: 'some value here',  
+    make: function (arg1, arg2) {  
+        return [ this, arg1, arg2 ];  
+    }  
+};
+var gasGuzzler = { year: 2008, model: 'Dodge Bailout' };  
+makeArray.apply( gasGuzzler, [ 'one', 'two' ] );  
+// => [ gasGuzzler, 'one' , 'two' ]  
+makeArray.call( gasGuzzler,  'one', 'two' );  
+// => [ gasGuzzler, 'one' , 'two' ]
+		</pre>
 	</section>
 
 	<section class="slide">
-		<h1></h1>
+		<h1>Prototyping &amp; Inheritance</h1>
+	  <ul>
+			<li>JavaScript is class-less and instead is prototype based.</li>
+			<li>Objects 'inherit' from <code>Object</code> directly</li>
+			<li>Every object, bar one, has a prototype (which is just another object)</li>
+			<li>Prototypes are commonly misunderstood (especially by me), but the most important thing to remember is - it's not class inheritance, so don't think it is.</li>
+			<li>Point to Note - JavaScript makes no distinction between a constructor and other functions</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h1>Some bad/odd bits</h1>
+	  <ul>
+			<li>Global scope</li>
+			<li>Semicolon Insertion</li>
+			<li>Falsy Values</li>
+			<li>Arrays</li>
+			<li>The 'this' keyword</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h1>Best Practices</h1>
 	  <ul>
 			<li></li>
 		</ul>
 	</section>
 
 	<section class="slide">
-		<h1></h1>
+		<h1>jQuery</h1>
+	  <ul>
+			<li></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h1>Testing</h1>
+	  <ul>
+			<li></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h1>Local Storage</h1>
+	  <ul>
+			<li></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h1>Server Side</h1>
+	  <ul>
+			<li></li>
+		</ul>
+	</section>
+	
+	<section class="slide">
+		<h1>Templating</h1>
 	  <ul>
 			<li></li>
 		</ul>
@@ -132,13 +238,19 @@ function factorial(n) {
 		</ul>
 	</section>
 	
-	 <section class="slide">
-	     <h1>The End</h1>
-	     <ul>
-	       <li>Thanks!</li>
-	     </ul>
-			<p>
-	 </section>
+	<section class="slide">
+		<h1>The End</h1>
+		<ul>
+			<li>Thanks!</li>
+		</ul>
+		<ul>
+			<li>This presentation was written in <a href="http://markdalgleish.com/projects/fathom/">Fathom.js</a></li>
+			<li>The best practices came from <a href="http://dev.opera.com/articles/view/javascript-best-practices/">Opera's JavaScript best practices</a></li>
+			<li>Code styling provided by <a href="http://code.google.com/p/google-code-prettify/">Google's Prettify</a></li>
+			<li>You should read "JavaScript:The Good Parts", by Douglas Crockford</li>
+			<li>Most of this presentation was nicked from <a href="http://en.wikipedia.org/">Wikipidia</a> or <a href="http://kanej.github.com/">John</a>.</li>
+		</ul>
+	</section>
 		
 	<script> 
 		$('#presentation').fathom({

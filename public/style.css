@@ -2,6 +2,10 @@
 h1 { background: #800020; color: #fff; padding: 10px 20px; margin: 0 0 0px; font-size: 300%; }
 h2 { font-size: 210%; color: #800020; margin-top: 10px;}
 
+ul {
+    padding: 40px 60px 0px;
+}
+
 ul li {
     font-size: 180%;
 }
@@ -18,10 +22,19 @@ i {
 }
 
 pre {
-font-family: monospace;
-font-size: 16pt;
-height: 600px;
-letter-spacing: -1px;
-line-height: 20pt;
-overflow: auto;
+	font-family: monospace;
+	font-size: 16pt;
+	height: 600px;
+	letter-spacing: -1px;
+	line-height: 20pt;
+	overflow: auto;
+	max-height: 300px;
+}
+
+.medium {
+	max-height: 400px;
+}
+
+code {
+	font-family: monospace;
 }
