@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML> 
+ 
+<html lang="en-GB"> 
+ 
+<head> 
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"> 
+	
+	<link rel="stylesheet" type="text/css" href="fathom/fathom.css" media="screen"> 
+	<!-- <link rel="stylesheet" type="text/css" href="assets/_styles.css" media="screen">  -->
+	<script src="fathom/jquery-1.6.2.min.js"></script> 
+	<script src="fathom/fathom.min.js"></script> 
+	
+	<title>DnD and Friends | The CSS Ninja</title> 
+ 
+</head> 
+<body> 
+	
+	<div id="presentation"> 
+		
+		<section class="slide begin"> 
+			<h1 class="title01">Javascript</h1> 
+			<h2>by David Rankin</h2> 
+		</section> 
+    
+    <section class="slide">
+        <h1>Reach</h1>
+        <ul>
+            <li>Installed on every desktop with a browser</li>
+            <li>All smartphones (iPhone, Android, WinPhone 7, Blackberry ... even WinMob)</li>
+            <li>Server (node.js, rhino)</li>
+        </ul>
+    </section>
+    
+    <section class="slide">
+        <h1>Atwood's Law</h1>
+        <ul>
+          <li>If it can be written in Javascript, it will be written in Javascript.</li>
+        </ul>
+    </section>
+		
+	<script> 
+		$('#presentation').fathom({
+			displayMode: 'single',
+			slideTagName: 'section'
+		});
+        
+        // Scripty goodness
+        (function(){
+            var dropzone = document.querySelector(".dropzone"),
+                dragr = document.querySelector(".dragr"),
+                dragout = document.querySelector(".dragout"),
+                fileaccess = document.querySelector(".fileaccess"),
+                fileinput = document.querySelector(".fileinput"),
+                fileaccessdataurl = document.querySelector(".fileaccessdataurl"),
+                fileaccessblob = document.querySelector(".fileaccessblob");
+ 
+            // DataTransfer demo
+            dragr.ondragstart = function(e) {
+                var dt = e.dataTransfer;
+                
+                dt.setData("text/plain", "I got dropped");
+            }
+            dropzone.ondrop = function(e) {
+                var dt = e.dataTransfer,
+                    elem = this;
+                
+                elem.textContent = dt.getData("text/plain");
+                e.preventDefault();
+            }
+            dropzone.ondragenter = function(e){e.preventDefault();}
+            dropzone.ondragover = function(e){e.preventDefault();}
+            
+            // Dragout demo
+            dragout.ondragstart = function(e) {
+                var dt = e.dataTransfer,
+                    data = this.getAttribute("data-downloadurl");
+                
+                dt.setData("DownloadURL", data);
+            }
+            
+            // File access demo
+            fileaccess.ondrop = function(e) {
+                var dt = e.dataTransfer, files = dt.files, elem = this;
+                
+                elem.innerHTML = "Name: " + files[0].name + " <br />Size: " + files[0].size + " <br />Type: " + files[0].type;
+                e.preventDefault();
+            }
+            fileaccess.ondragenter = function(e){e.preventDefault();}
+            fileaccess.ondragover = function(e){e.preventDefault();}
+            
+            //File access file input demo
+            fileinput.onchange = function(e) {
+                var files = fileinput.files, elem = this;
+                
+                elem.parentNode.innerHTML = "Name: " + files[0].name + " <br />Size: " + files[0].size + " <br />Type: " + files[0].type;
+                e.preventDefault();
+            }
+            
+            // FileReader demo
+            fileaccessdataurl.ondrop = function(e) {
+                var dt = e.dataTransfer, files = dt.files, elem = this,
+                    img = document.createElement("img"),
+                    reader = new FileReader();
+                
+                reader.onloadend = function(file) {
+                    img.src = file.target.result;
+                    elem.appendChild(img);
+                }
+                reader.readAsDataURL(files[0]); 
+                e.preventDefault();
+            }
+            fileaccessdataurl.ondragenter = function(e){e.preventDefault();}
+            fileaccessdataurl.ondragover = function(e){e.preventDefault();}
+            
+            // Blob URL demo
+            fileaccessblob.ondrop = function(e) {
+            var dt = e.dataTransfer, files = dt.files, elem = this,
+                url = url = window.URL || window.webkitURL;
+ 
+                elem.innerHTML = url.createObjectURL(files[0]);
+                e.preventDefault();
+            }
+            fileaccessblob.ondragenter = function(e){e.preventDefault();}
+            fileaccessblob.ondragover = function(e){e.preventDefault();}
+        })();
+	</script> 
+	<!-- Google analytics --> 
+	<script type="text/javascript"> 
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script> 
+	<script type="text/javascript"> 
+		var pageTracker = _gat._getTracker("UA-4638292-1");
+		pageTracker._initData();
+		pageTracker._trackPageview();
+	</script> 
+	
+</body> 
+</html> 

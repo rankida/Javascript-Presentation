@@ -1,0 +1,152 @@
+@font-face {
+    font-family: 'UbuntuRegular';
+    src: url('Ubuntu-Regular.eot');
+    src: local('?'), url('Ubuntu-Regular.woff') format('woff'), url('Ubuntu-Regular.ttf') format('truetype'), url('Ubuntu-Regular.svg#webfontcceGD1qN') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+input:focus {
+    outline: 0;
+}
+
+body { overflow: hidden; font-family: 'UbuntuRegular'; color: #18191D; }
+
+#presentation {
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+section.slide {
+    -webkit-box-shadow: 0 0 50px #c0c0c0;
+    -moz-box-shadow: 0 0 50px #c0c0c0;
+    box-shadow: 0 0 50px #c0c0c0;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    display: inline-block;
+    height: 700px;
+    position: relative;
+    vertical-align: top;
+    width: 900px;
+    background: #fff;
+    color: #444;
+}
+    section.inactiveslide {
+        opacity: 0.4;
+    }
+    section.activeslide {
+        opacity: 1;
+    }
+
+h1 { background: #18191D; color: #fff; padding: 10px 20px; margin: 0 0 20px; font-size: 200%; }
+h2 { color: #18191D; font-size: 100%; }
+
+.begin, .center { text-align: center; }
+.begin h1 {
+    background: none;
+    margin: 40px 0 100px;
+    font-size: 400%;
+    color: #18191D;
+    padding: 0;
+    text-shadow: #ccc 1px 1px, #ccc 2px 2px, #ccc 3px 3px, #ccc 4px 4px, #ccc 5px 5px, #ccc 6px 6px, #ccc 7px 7px, #ccc 8px 8px, #ccc 9px 9px, #ccc 10px 10px, #ccc 11px 11px;
+}
+.begin img, .center img {
+    padding: 0 0 40px;
+}
+
+ul {
+    padding: 40px 60px;
+}
+ul li {
+    font-size: 150%;
+    font-weight: normal;
+    line-height: 170%;
+    list-style-type: disc;
+    margin-bottom: 15px;
+    text-align: left;
+}
+ul ul { padding: 10px 30px; }
+ul li li {
+    font-size: 80%;
+}
+
+pre, .module01 {
+    width: 90%;
+    margin: 15px auto;
+    padding: 10px;
+    border: 2px solid #000;
+    max-height: 260px;
+    overflow: auto;
+    text-align: left;
+}
+.module01 { text-align: center; height: 100px; }
+.wrapper {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.fl { float: left; }
+
+.pad01 { padding-top: 85px; }
+
+.nmar01 { margin-top: -60px; }
+
+.posabs { position: absolute; }
+.tl { top: 20px; left: 20px; }
+.tr { top: 20px; right: 20px; }
+.bl { bottom: 20px; left: 20px; }
+.br { bottom: 20px; right: 20px; }
