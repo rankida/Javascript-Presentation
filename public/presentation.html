@@ -5,9 +5,18 @@
 	
 	<link rel="stylesheet" type="text/css" href="fathom/fathom.css" media="screen"> 
 	<link rel="stylesheet" type="text/css" href="style.css" media="screen">
+	<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
 	<!-- <link rel="stylesheet" type="text/css" href="assets/_styles.css" media="screen">  -->
 	<script src="fathom/jquery-1.6.2.min.js"></script> 
-	<script src="fathom/fathom.min.js"></script> 
+	<script src="fathom/fathom.min.js"></script>
+	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+	
+	<script>
+	$(document).ready(function(){
+	    $('pre').addClass('prettyprint').attr('tabIndex', 0);
+	    prettyPrint();
+	});
+	</script>
 	
 	<title>JavaScript</title> 
  
@@ -46,19 +55,83 @@
     </section>
 
 	 <section class="slide">
-	     <h1></h1>
+	     <h1>What will we cover</h1>
 	     <ul>
-	       <li></li>
+	       <li>Some basic syntax and usages</li>
+				 <li>Things to be careful of (the bad parts)</li>
+				 <li>Good practices</li>
+				 <li>jQuery</li>
+				 <li>Testing</li>
+				 <li>Lots more if we have time (and I have the slides)</li>
+					<ul>
+						<li>Local storage, server side, templating, PhoneGap, MVC frameworks, CouchDB, CoffeeScript...</li>
+					</ul>
 	     </ul>
 	 </section>
 
-	 <section class="slide">
-	     <h1></h1>
-	     <ul>
-	       <li></li>
-	     </ul>
-	 </section>
+	<section class="slide">
+	 	<h1>But first, some background</h1>
+	  	<ul>
+	    	<li>Initially called LiveScript (codename Mocha)</li>
+				<li>Released as part of Netscape Navigator 2.0 in September 1995</li>
+				<li>Renamed to JavaScript around the time of Java's launch</li>
+				<li>Microsoft created it's own version, JScript, which lost (if it was ever competing)</li>
+				<li>For a good while JavaScript was used for button mouseovers and other simple client-side features</li>
+	    </ul>
+	</section>
 
+	<section class="slide">
+		<h1>>> Fast forward to today >></h1>
+	  <ul>
+			<li>The speed of JavaScript has increased dramatically</li><!-- Thanks to the browser wars, even users know it!-->
+			<li>It is now the fastest dynamic language</li>
+			<li>A field of intense innovation and growth</li>
+			<li>Google's GMAIL is now over 400,000 lines of Javascript</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h1>Syntax</h1>
+	  <ul>
+			<li></li>
+		</ul>
+		<pre>
+function factorial(n) {
+  if (n == 0) {
+	return 1;
+  }
+  return n * factorial(n - 1); 
+}</pre>
+	</section>
+
+	<section class="slide">
+		<h1></h1>
+	  <ul>
+			<li></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h1></h1>
+	  <ul>
+			<li></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h1></h1>
+	  <ul>
+			<li></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h1></h1>
+	  <ul>
+			<li></li>
+		</ul>
+	</section>
+	
 	 <section class="slide">
 	     <h1>The End</h1>
 	     <ul>

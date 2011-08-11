@@ -16,3 +16,12 @@ p {
 i {
 	font-style:italic;
 }
+
+pre {
+font-family: monospace;
+font-size: 16pt;
+height: 600px;
+letter-spacing: -1px;
+line-height: 20pt;
+overflow: auto;
+}
