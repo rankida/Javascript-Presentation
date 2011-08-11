@@ -1,0 +1,18 @@
+
+h1 { background: #800020; color: #fff; padding: 10px 20px; margin: 0 0 0px; font-size: 300%; }
+h2 { font-size: 210%; color: #800020; margin-top: 10px;}
+
+ul li {
+    font-size: 180%;
+}
+
+p {
+	font-size: 180%;
+    padding: 40px 60px;
+	text-align: rigth;
+	width: 100%;
+}
+
+i {
+	font-style:italic;
+}
