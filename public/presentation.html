@@ -242,24 +242,24 @@ String.prototype.times = function(count) {
 			<li>Worth remembering they ain't classes but just refs to objects</li>
 		</ul>
 		<pre class="big">
-var A = function(name) {
+ var A = function(name) {
     this.name = name;
-}
+ }
 
-var a = new A('alpha');
-a.name; //'alpha'
+ var a = new A('alpha');
+ a.name; //'alpha'
 
-A.prototype.x = 23;
+ A.prototype.x = 23;
 
-a.x; //23
+ a.x; //23
 
-// BUT...
-var b = new B('beta');
-b.name; //'beta'
+ // BUT...
+ var b = new B('beta');
+ b.name; //'beta'
 
-B.prototype = {x:23};
+ B.prototype = {x:23};
 
-b.x; //null
+ b.x; //null
 		</pre>
 	</section>
 	
@@ -372,11 +372,11 @@ null === undefined  /* false */
 			<li>Because they are just object you can add all sorts to them, but typically you add properties with integer names</li>
 		</ul>
 		<pre class="small">
-var a = ['one', 2];
-a.length; // 2
-a[0]; // returns "one"
-a[3] = 'three';
-a.crazy = "don't you love dynamic";
+ var a = ['one', 2];
+ a.length; // 2
+ a[0]; // returns "one"
+ a[3] = 'three';
+ a.crazy = "don't you love dynamic";
 </pre>
 	</section>
 
@@ -403,10 +403,16 @@ a.crazy = "don't you love dynamic";
 	
 	<section class="slide">
 		<h1><img src="img/JQuery_logo.svg.png"> Example</h1>
-		<pre class="big">
+		<pre class="full">
 $(document).ready(function() {
 	
  $("div.test").add("p.quote").addClass("blue").slideDown("slow");
+
+ // &lt;input name=&quot;hello&quot;&gt;selected&lt;/input&gt;
+ $('a[name*="he"]').css('border','3px dotted green');
+
+ // Adds some utils too
+ jQuery.trim("   want to remove the surrounding white space   ");
 
  $.ajax({
 	type : "POST",
@@ -684,23 +690,20 @@ var renderedTemplate = $.mustache(template, workDto);
 	</section>
 
 	<section class="slide">
-		<h1></h1>
+		<h1>Apache CouchDB</h1>
 	  <ul>
-			<li></li>
+			<li>CouchDB is a document-oriented database that can be queried and indexed in a MapReduce fashion using JavaScript.</li>
+			<li>Documents (JSON), Views (precomputed Javascript functions), Distributed (now on mobile with CouchOne Mobile)</li>
 		</ul>
-	</section>
-
-	<section class="slide">
-		<h1></h1>
-	  <ul>
-			<li></li>
-		</ul>
+		<div class="center">
+			<img src="img/couchdb_sketch.png">
+		</div>
 	</section>
 
 	<section class="slide">
 		<h1>Stuff I ran out of time for :(</h1>
 	  <ul>
-			<li>Local storage, PhoneGap, MVC frameworks, CouchDB, CoffeeScript...</li>
+			<li>Local storage, PhoneGap, MVC frameworks, CoffeeScript...</li>
 		</ul>
 	</section>
 	
