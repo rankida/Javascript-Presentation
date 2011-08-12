@@ -379,11 +379,15 @@ a[3] = 'three';
 a.crazy = "don't you love dynamic";
 </pre>
 	</section>
-	
+
 	<section class="slide">
-		<h1>The 'this' Keyword</h1>
+		<h1>JSLint</h1>
 	  <ul>
-			<li></li>
+			<li>Code quality tool for JavaScript</li>
+			<li>JSLint defines a professional subset of JavaScript</li>
+			<li>JSLint scans the text and reports syntactic and style errors</li>
+			<li>Will also validate JSON and some aspects of HTML</li>
+			<li>Written by Douglas Crockford</li>
 		</ul>
 	</section>
 
@@ -541,20 +545,13 @@ test(&quot;some other test&quot;, function() {
 		</div>
 	  <ul>
 			<li>Behaviour Driven testing in JavaScript</li>
-		</ul>
-		<pre>
+			<pre>
 describe("Jasmine", function() {
   it("makes testing JavaScript awesome!", function() {
     expect(yourCode).toBeLotsBetter();
   });
 });
-		</pre>
-	</section>
-
-	<section class="slide">
-		<h1>Local Storage</h1>
-	  <ul>
-			<li></li>
+			</pre>
 		</ul>
 	</section>
 
@@ -574,24 +571,115 @@ describe("Jasmine", function() {
 	<section class="slide">
 		<h1>Rhino</h1>
 	  <ul>
-			<li></li>
+			<li>Open-source implementation of JavaScript written entirely in Java</li>
+			<li>Typically used to give Java programs user scripting abilities</li>
+			<li>Works in both compiled and interpreted mode</li>
+			<li>Bundled into Java SE version 6 (Dec 2006)</li>
+			<pre>
+ScriptEngineManager mgr = new ScriptEngineManager();
+ScriptEngine engine = mgr.getEngineByName("JavaScript");
+
+// Now we have a script engine instance that 
+// can execute some JavaScript
+try {
+    engine.put("name", args[0]);
+    engine.eval("print('Hello ' + name + '!')");
+} catch (ScriptException ex) {
+    ex.printStackTrace();
+}
+			</pre>
 		</ul>
 	</section>
 	
 	<section class="slide">
-		<h1>node.js</h1>
+		<h1>Node.js</h1>
 	  <ul>
-			<li></li>
+			<li>Goal to provide an easy way to build scalable network programs</li>
+			<li>Event-driven I/O server-side JavaScript environment based on V8</li>
+			<li>Uses OS callbacks rather than OS Threads to achieve lightweight servers.</li>
+			<li>None of the usual thread problems like deadlocks and races</li>
+			<li>Actively developed and seeing increased usage</li>
+			<li>Now supported by Heroku</li>
 		</ul>
+		<div style="height:10px">
+		</div>
+		<div style="background:#353129">
+			<img src="img/nodejs.png" style="padding: 0px 50px"></img>
+		</div>
 	</section>
 	
 	<section class="slide">
-		<h1>Templating</h1>
-		<pre>
-mustache
+		<h1>node.js example</h1>
+		<pre class="smaller">
+// Hello World HTTP Server
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(1337, "127.0.0.1");
+console.log('Server running at http://127.0.0.1:1337/');
 		</pre>
 		<pre>
-$.tmpl()
+// TCP Echo server
+var net = require('net');
+
+var server = net.createServer(function (socket) {
+  socket.write("Echo server\r\n");
+  socket.pipe(socket);
+});
+
+server.listen(1337, "127.0.0.1");
+		</pre>
+	</section>
+	
+	<section class="slide">
+		<h1>Templating with mustache.js</h1>
+		<pre>
+&lt;script type=&quot;text/x-mustache-template&quot;&gt;
+ &lt;p&gt;&lt;b&gt;The location where the maintenance is being performed:&lt;/b&gt; {{#PerformedAtLocation}}{{Id}}{{/PerformedAtLocation}}&lt;/p&gt;
+ &lt;p&gt;&lt;b&gt;Equipment that was maintained:&lt;/b&gt; {{#Cargo}}{{MaintainedEquipment}}{{/Cargo}}&lt;/p&gt;
+ &lt;p&gt;&lt;b&gt;Reason code for the maintenance:&lt;/b&gt; {{#Cargo}}{{ReasonCode}}{{/Cargo}}&lt;/p&gt;
+ &lt;p&gt;&lt;b&gt;Person responsible for the maintenance:&lt;/b&gt; {{#Tasks}}{{#AssignedTo}}{{FullName}}{{/AssignedTo}}{{/Tasks}}&lt;/p&gt;
+ &lt;p&gt;&lt;b&gt;Time taken for the maintenance (hours):&lt;/b&gt;  {{#Cargo}}{{#TaskCargo}}{{#Shifts}}{{Hours}}{{/Shifts}}{{/TaskCargo}}{{/Cargo}}&lt;/p&gt; 
+ &lt;p&gt;&lt;b&gt;Description of the Maintenance Performed:&lt;/b&gt;&lt;/p&gt; 
+ &lt;p&gt;{{#Cargo}}{{Description}}{{/Cargo}}&lt;/p&gt;
+&lt;/script&gt;
+		</pre>
+		<pre>
+var workDto = {"Id":"549b3e17-a82c-42a1-8916-213c506b37f9",
+               "PerformedAtLocation":{"Id":"ABZ","Name":null},
+               "Tasks":[{...}]};
+workDto.Cargo.TaskCargo.Shifts = {};
+workDto.Cargo.TaskCargo.Shifts.Hours = workDto.Cargo.TaskCargo[0].Shifts[0].Hours;
+
+// Get template and populate using workDto
+var template = $('script[type="text/x-mustache-template"]').html();
+var renderedTemplate = $.mustache(template, workDto);
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h1>Templating with jQuery <code>tmpl()</code></h1>
+		<pre class="full">
+&lt;ul id=&quot;movieList&quot;&gt;&lt;/ul&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var movies = [
+      { Name: &quot;The Red Violin&quot;, ReleaseYear: &quot;1998&quot; },
+      { Name: &quot;Eyes Wide Shut&quot;, ReleaseYear: &quot;1999&quot; },
+      { Name: &quot;The Inheritance&quot;, ReleaseYear: &quot;1976&quot; }
+  ];
+
+  var markup = &quot;&lt;li&gt;&lt;b&gt;${Name}&lt;/b&gt; (${ReleaseYear})&lt;/li&gt;&quot;;
+
+  // Compile the markup as a named template
+  $.template( &quot;movieTemplate&quot;, markup );
+
+  // Render the template with the movies data and insert
+  // the rendered HTML under the &quot;movieList&quot; element
+  $.tmpl( &quot;movieTemplate&quot;, movies )
+      .appendTo( &quot;#movieList&quot; );
+&lt;/script&gt;
 		</pre>
 	</section>
 
@@ -606,6 +694,13 @@ $.tmpl()
 		<h1></h1>
 	  <ul>
 			<li></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h1>Stuff I ran out of time for :(</h1>
+	  <ul>
+			<li>Local storage, PhoneGap, MVC frameworks, CouchDB, CoffeeScript...</li>
 		</ul>
 	</section>
 	

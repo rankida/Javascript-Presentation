@@ -39,6 +39,10 @@ pre {
 	max-height: 500px;
 }
 
+.smaller {
+	max-height: 200px;
+}
+
 .small {
 	max-height: 130px;
 }
