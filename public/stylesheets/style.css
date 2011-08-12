@@ -35,6 +35,10 @@ pre {
 	max-height: 400px;
 }
 
+.big {
+	max-height: 500px;
+}
+
 code {
 	font-family: monospace;
 }

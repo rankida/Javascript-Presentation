@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"> 
 	
 	<link rel="stylesheet" type="text/css" href="fathom/fathom.css" media="screen"> 
-	<link rel="stylesheet" type="text/css" href="style.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" media="screen">
 	<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
 	<!-- <link rel="stylesheet" type="text/css" href="assets/_styles.css" media="screen">  -->
 	<script src="fathom/jquery-1.6.2.min.js"></script> 
@@ -29,6 +29,10 @@
 			<h1 class="title01">.js</h1> 
 			<h2>A food for thought on all things JavaScript</h2>
 			by David Rankin
+			<div id="spacer" style="height:100px"></div>
+			<div>
+				<img src="img/JaffaCakeTower.jpg"/>
+			</div>
 		</section> 
     
     <section class="slide">
@@ -172,6 +176,94 @@ makeArray.call( gasGuzzler,  'one', 'two' );
 	</section>
 
 	<section class="slide">
+		<h1>Getting a prototype</h1>
+	  <ul>
+			<li>A prototype is an object from which other objects inherit properties</li>
+			<li>The prototype's methods are inherited by the 'child' object</li>
+		</ul>
+		<pre>
+	var a = {};
+  
+	//Firefox 3.6 and Chrome 5 (ECMA 5 standard)
+	Object.getPrototypeOf(a); //[object Object]
+  
+	//Firefox 3.6, Chrome 5 and Safari 4
+	a.__proto__; //[object Object]
+  
+	//all browsers
+	a.constructor.prototype; //[object Object]
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h1>'Classical' Inheritance</h1>
+	  <ul>
+			<li>You can use prototypes to mimic classical inheritance (to a point)</li>
+		</ul>
+		<pre class="big">
+// Constructor.this is returned as new object and its internal [[prototype]] property will be set to the constructor's default prototype property
+var Circle = function(radius) {
+    this.radius = radius;
+    //next line is implicit, added for illustration only
+    //this.__proto__ = Circle.prototype;
+}
+
+// augment Circle's default prototype property thereby augmenting
+// the prototype of each generated instance
+Circle.prototype.area = function() {
+   return Math.PI*this.radius*this.radius;
+}
+
+// create two instances of a circle and make each leverage
+// the common prototype
+var a = new Circle(3), b = new Circle(4);
+a.area().toFixed(2); //28.27
+b.area().toFixed(2); //50.27</pre>
+	</section>
+
+	<section class="slide">
+		<h1>Alter prototypes</h1>
+	  <ul>
+			<li>JavaScript is dynamic, so you can open up "classes" (really prototypes) and modify them.</li>
+			<li>Prototypical inheritance is not a player when setting property values.</li>
+		</ul>
+		<pre>
+String.prototype.times = function(count) {
+    return count < 1 ? '' : new Array(count + 1).join(this);
+}
+
+"hello!".times(3); //"hello!hello!hello!";
+"please...".times(6); //"please...please...please...please...please...please..."</pre>
+	</section>
+
+	<section class="slide">
+		<h1>More Prototype mods</h1>
+	  <ul>
+			<li>Worth remembering they ain't classes but just refs to objects</li>
+		</ul>
+		<pre class="big">
+var A = function(name) {
+    this.name = name;
+}
+
+var a = new A('alpha');
+a.name; //'alpha'
+
+A.prototype.x = 23;
+
+a.x; //23
+
+// BUT...
+var b = new B('beta');
+b.name; //'beta'
+
+B.prototype = {x:23};
+
+b.x; //null
+		</pre>
+	</section>
+	
+	<section class="slide">
 		<h1>Some bad/odd bits</h1>
 	  <ul>
 			<li>Global scope</li>
@@ -181,9 +273,104 @@ makeArray.call( gasGuzzler,  'one', 'two' );
 			<li>The 'this' keyword</li>
 		</ul>
 	</section>
+	
+	<section class="slide">
+		<h1>Global == BAD!! (or should that be ===)</h1>
+	  <ul>
+			<li>No namespace system, managing dependencies between code is a nightmare</li>
+			<li>By default scope is Global so use the var keyword!</li>
+		</ul>
+		<pre>
+// GLOBAL (1): place the var statement outside of any function
+var foo = "value";
+
+// GLOBAL (2): Add a property to a global object.
+window.foo = "value";
+
+// GLOBAL (3): Implied global variables.
+foo = "value";
+		</pre>
+	</section>
 
 	<section class="slide">
-		<h1>Best Practices</h1>
+		<h1>Hiding your private parts in public</h1>
+	  <ul>
+			<li>There are techniques to make things private.</li>
+		</ul>
+		<pre class="big">
+MyObject = function(){
+
+  var privateMethod = function(){ /* do stuff */ };
+
+  var obj = {
+    publicProperty:5,
+    publicMethod:function(){ /* do stuff */ };
+  };
+
+  return obj;
+}(); // run it right away
+		</pre>
+	</section>
+	
+	<section class="slide">
+		<h1>Semicolon Insertion</h1>
+	  <ul>
+			<li>The semicolon is required by JavaScript...</li>
+			<li>.. but it has a mechanism that tries to correct missing ;</li>
+		</ul>
+		<pre class="medium">
+return
+	a + b;
+
+// Returns undefined. Treated as:
+//   return;
+//   a + b;
+
+//But:
+a = b + c
+(d + e).foo()
+
+// Treated as:
+//   a = b + c(d + e).foo();
+
+// This is why you always put the { on the same line
+return
+{
+	status: true;
+}
+		</pre>
+	</section>
+	
+	<section class="slide">
+		<h1>Falsy Values and ===</h1>
+	  <ul>
+			<li>JavaScript has a lot of false values: <code>0, NaN, '' [empty string], false, null, undefined</code></li>
+			<li>JavaScript has two sets of equality operators <code> === !==</code> and <code>== !=</code></li>
+			<li>Use <code>===</code> and <code>!==</code> because they work as you expect</li>
+		</ul>
+		<pre>
+'' == '0' /* false */   '0' == '' /* true */ 0 == '0'  /* true  */
+false == 'false'   /* false */           false == '0'  /* true  */
+false == undefined /* false */           false == null /* false */
+null == undefined  /* true  */          '\t\r\n' == 0  /* true  */
+
+// Use === and !==
+'' === '0'          /* false */
+false === '0'       /* false */
+null === undefined  /* false */
+
+		</pre>
+	</section>
+	
+	<section class="slide">
+		<h1>Arrays</h1>
+	  <ul>
+			<li></li>
+		</ul>
+	</section>
+	
+	<section class="slide">
+		<h1>The 'this' Keyword</h1>
 	  <ul>
 			<li></li>
 		</ul>
@@ -247,8 +434,9 @@ makeArray.call( gasGuzzler,  'one', 'two' );
 			<li>This presentation was written in <a href="http://markdalgleish.com/projects/fathom/">Fathom.js</a></li>
 			<li>The best practices came from <a href="http://dev.opera.com/articles/view/javascript-best-practices/">Opera's JavaScript best practices</a></li>
 			<li>Code styling provided by <a href="http://code.google.com/p/google-code-prettify/">Google's Prettify</a></li>
+			<li>Prototype examples taken from <a href="http://javascriptweblog.wordpress.com/2010/06/07/understanding-javascript-prototypes/">a random blog</a></li>
 			<li>You should read "JavaScript:The Good Parts", by Douglas Crockford</li>
-			<li>Most of this presentation was nicked from <a href="http://en.wikipedia.org/">Wikipidia</a> or <a href="http://kanej.github.com/">John</a>.</li>
+			<li>Most of this presentation was nicked from <a href="http://en.wikipedia.org/">Wikipedia</a> or <a href="http://kanej.github.com/">John</a>.</li>
 		</ul>
 	</section>
 		
