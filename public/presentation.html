@@ -365,8 +365,19 @@ null === undefined  /* false */
 	<section class="slide">
 		<h1>Arrays</h1>
 	  <ul>
-			<li></li>
+			<li>JavaScript doesn't have real arrays</li>
+			<li>Arrays are implemented through the use of a object prototype</li>
+			<li>This means performance is not as good as you would expect from an Array</li>
+			<li><code>typeof</code> will return 'object' for Array 'instances'</li>
+			<li>Because they are just object you can add all sorts to them, but typically you add properties with integer names</li>
 		</ul>
+		<pre class="small">
+var a = ['one', 2];
+a.length; // 2
+a[0]; // returns "one"
+a[3] = 'three';
+a.crazy = "don't you love dynamic";
+</pre>
 	</section>
 	
 	<section class="slide">
@@ -377,17 +388,167 @@ null === undefined  /* false */
 	</section>
 
 	<section class="slide">
-		<h1>jQuery</h1>
+		<h1><img src="img/JQuery_logo.svg.png"></img></h1>
 	  <ul>
-			<li></li>
+			<li>An awsome framwork for simplifying DOM manipulations cross browser</li>
+			<li>Released in 2006 at BarCamp by the js god John Resig</li>
+			<li>Used by over 46% of the 10,000 most visited websites</li>
+			<li>jQuery is the first open source project Microsoft provides support for that it didn't write</li>
+		</ul>
+	</section>
+	
+	<section class="slide">
+		<h1><img src="img/JQuery_logo.svg.png"> Example</h1>
+		<pre class="big">
+$(document).ready(function() {
+	
+ $("div.test").add("p.quote").addClass("blue").slideDown("slow");
+
+ $.ajax({
+	type : "POST",
+	url : "example.php",
+	data : "name=David&amp;location=Glasgow",
+	success : function(msg){
+	  alert( "Data Saved: " + msg );
+	}
+ });
+});
+		</pre>
+	</section>
+	
+	<section class="slide">
+		<h1>jQuery plugins and other projects</h1>
+	  <ul>
+			<li>jQuery has a framework for adding plugins</li>
+			<li>There is often a jQuery plugin to do what you want</li>
+			<li>jQuery create plugins for dev functionality not yet ready for trunk</li>
+			<li>jQuery UI provides an abstraction for animation, advanced effects and high-level, themeable widgets, built on top of jQuery</li>
+			<li>Our Portal web <code>process</code> is in fact a jQuery UI plugin.</li>
 		</ul>
 	</section>
 
 	<section class="slide">
 		<h1>Testing</h1>
 	  <ul>
-			<li></li>
+			<li>Testing is JavaScript is not simple.</li>
+			<li>You can only unit test JavaScript that does not manipulate the DOM</li>
+			<li>How do you run a JavaScript test?</li>
+			<li>Two framworks worth mentioning
+				<li>QUnit - http://docs.jquery.com/Qunit</li>
+				<li>Jasmine - http://pivotal.github.com/jasmine/</li>
+			</li>
 		</ul>
+	</section>
+	
+	<section class="slide">
+		<h1>QUnit</h1>
+	  <ul>
+			<li>Created to support the jQuery codebase</li>
+			<li>Now supported by Resharper 6</li>
+		</ul>
+		<pre class="medium">
+test("a basic test example", function() {
+  ok( true, "this test is fine" );
+  var value = "hello";
+  equal( value, "hello", "We expect value to be hello" );
+});
+
+module("Module A");
+
+test("first test within module", function() {
+  ok( true, "all pass" );
+});
+
+test("second test within module", function() {
+  ok( true, "all pass" );
+});
+
+module("Module B");
+
+test("some other test", function() {
+  expect(2);
+  equal( true, false, "failing test" );
+  equal( true, true, "passing test" );
+});
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h1>Qunit Results</h1>
+		<div style="height:50px"></div>
+		<div class="center">
+	  	<img src="img/QunitRestults.png"></img>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>QUnit - a test suite</h1>
+	<pre class="full">
+&lt;!DOCTYPE&gt;
+	&lt;html&gt;
+	&lt;head&gt;
+	  &lt;script src=&quot;http://code.jquery.com/jquery-latest.js&quot;&gt;&lt;/script&gt;
+	  &lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/qunit/git/qunit.css&quot; type=&quot;text/css&quot; media=&quot;screen&quot; /&gt;
+		&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/qunit/git/qunit.js&quot;&gt;&lt;/script&gt;
+
+	  &lt;script&gt;
+	  $(document).ready(function(){
+
+	test(&quot;a basic test example&quot;, function() {
+	  ok( true, &quot;this test is fine&quot; );
+	  var value = &quot;hello&quot;;
+	  equal( value, &quot;hello&quot;, &quot;We expect value to be hello&quot; );
+	});
+
+	module(&quot;Module A&quot;);
+
+test(&quot;first test within module&quot;, function() {
+  ok( true, &quot;all pass&quot; );
+});
+
+test(&quot;second test within module&quot;, function() {
+  ok( true, &quot;all pass&quot; );
+});
+
+module(&quot;Module B&quot;);
+
+test(&quot;some other test&quot;, function() {
+  expect(2);
+  equal( true, false, &quot;failing test&quot; );
+  equal( true, true, &quot;passing test&quot; );
+});
+
+  });
+  &lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1 id=&quot;qunit-header&quot;&gt;QUnit example&lt;/h1&gt;
+ &lt;h2 id=&quot;qunit-banner&quot;&gt;&lt;/h2&gt;
+ &lt;div id=&quot;qunit-testrunner-toolbar&quot;&gt;&lt;/div&gt;
+ &lt;h2 id=&quot;qunit-userAgent&quot;&gt;&lt;/h2&gt;
+ &lt;ol id=&quot;qunit-tests&quot;&gt;&lt;/ol&gt;
+ &lt;div id=&quot;qunit-fixture&quot;&gt;test markup, will be hidden&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+	</pre>
+	</section>
+
+	<section class="slide">
+		<h1>Jasmine</h1>
+		<div class="center">
+			<img src="img/jasmine_logo.png"></img>
+		</div>
+	  <ul>
+			<li>Behaviour Driven testing in JavaScript</li>
+		</ul>
+		<pre>
+describe("Jasmine", function() {
+  it("makes testing JavaScript awesome!", function() {
+    expect(yourCode).toBeLotsBetter();
+  });
+});
+		</pre>
 	</section>
 
 	<section class="slide">
@@ -400,15 +561,38 @@ null === undefined  /* false */
 	<section class="slide">
 		<h1>Server Side</h1>
 	  <ul>
+			<li>One language on both server and client</li>
+			<li>There are now real JavaScript contenders</li>
+			<li>Allows for browser-less tests, lightweight servers and fast dynamic programs</li>
+		</ul>
+		<img src="img/rhino.jpg" class="fl" style="padding:10px"></img>
+		<div style="background:#353129" class="fl">
+			<img src="img/nodejs.png"></img>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>Rhino</h1>
+	  <ul>
+			<li></li>
+		</ul>
+	</section>
+	
+	<section class="slide">
+		<h1>node.js</h1>
+	  <ul>
 			<li></li>
 		</ul>
 	</section>
 	
 	<section class="slide">
 		<h1>Templating</h1>
-	  <ul>
-			<li></li>
-		</ul>
+		<pre>
+mustache
+		</pre>
+		<pre>
+$.tmpl()
+		</pre>
 	</section>
 
 	<section class="slide">

@@ -39,6 +39,13 @@ pre {
 	max-height: 500px;
 }
 
+.small {
+	max-height: 130px;
+}
+
+.full {
+	max-height: 600px;
+}
 code {
 	font-family: monospace;
 }
